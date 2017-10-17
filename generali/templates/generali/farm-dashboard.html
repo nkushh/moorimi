@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block content %}
+<div class="row">
+    <div class="page-header">
+        <h1>{{ farm }}'s Farm</h1>
+    </div>
+</div>
+
+<div class="row">
+    
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <a href="{% url 'dairy:cattle-list' %}">
+        <div class="mini-stat clearfix bg-primary">
+            <span class="mini-stat-icon"><i class="mdi mdi-cow"></i></span>
+            <div class="mini-stat-info text-right text-white">
+                <span class="counter">{% if total_cattle %}{{total_cattle}}{% else %}0{% endif %}</span>
+                Total Cattle
+            </div>
+        </div>
+        </a>
+    </div>
+    
+
+    
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <a href="{% url 'dairy:milk-records' %}">
+        <div class="mini-stat clearfix bg-primary">
+            <span class="mini-stat-icon"><i class="mdi mdi-gas-cylinder"></i></span>
+            <div class="mini-stat-info text-right text-white">
+                <span class="counter">{% if total_milk %}{{ total_milk.amount__sum | intcomma |floatformat:1 }} L{% else %}0 L{% endif %}</span>
+                Milk produced
+            </div>
+        </div>
+        </a>
+    </div>
+    
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <a href="{% url 'dairy:milk-sale-records' %}">
+        <div class="mini-stat clearfix bg-primary">
+            <span class="mini-stat-icon"><i class="mdi mdi-cash-multiple"></i></span>
+            <div class="mini-stat-info text-right text-white">
+                <span class="counter">Ksh.
+                {% if current_year_sales.curr_year_sales %}
+                {{ current_year_sales.curr_year_sales|intcomma }}
+                {% else %}
+                0
+                {% endif %}
+                </span>
+                Milk Sale
+            </div>
+        </div>
+        </a>
+    </div>
+    
+</div>
+
+<div class="row">
+
+    <div class="col-xl-4">
+        <div class="card m-b-20">
+            <div class="card-block">
+                <h4 class="mt-0 header-title">Milk Produced in Litres</h4>
+
+                <ul class="list-inline widget-chart m-t-20 text-center">
+                    <li>
+                        <h4 class=""><b>
+                        {% if current_month_milk.current_month %}
+                        {{ current_month_milk.current_month }}
+                        {% else %}
+                        0
+                        {% endif %}
+                        </b></h4>
+                        <p class="text-muted m-b-0">This month</p>
+                    </li>
+                    <li>
+                        <h4 class=""><b>
+                        {% if previous_month_milk.previous_month %}
+                        {{ previous_month_milk.previous_month }}
+                        {% else %}
+                        0
+                        {% endif %}
+                        </b></h4>
+                        <p class="text-muted m-b-0">Last month</p>
+                    </li>
+                    <!-- <li>
+                        <h4 class=""><b>{{ current_year_milk.current_year }}</b></h4>
+                        <p class="text-muted m-b-0">This year</p>
+                    </li> -->
+                </ul>
+
+                <div id="milk-produced" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4">
+        <div class="card m-b-20">
+            <div class="card-block">
+                <h4 class="mt-0 header-title">Milk Sale Revenue in Ksh</h4>
+
+                <ul class="list-inline widget-chart m-t-20 text-center">
+                    <li>
+                        <h4 class=""><b>
+                        {% if current_month_sales.curr_month_sales %}
+                        {{ current_month_sales.curr_month_sales|intcomma }}
+                        {% else %}
+                        0
+                        {% endif %}
+                        </b></h4>
+                        <p class="text-muted m-b-0">This month</p>
+                    </li>
+                    <li>
+                        <h4 class=""><b>
+                        {% if previous_month_sales.prev_month_sales %}
+                        {{ previous_month_sales.prev_month_sales|intcomma }}
+                        {% else %}
+                        0
+                        {% endif %}
+                        </b></h4>
+                        <p class="text-muted m-b-0">Last month</p>
+                    </li>
+                    <!-- <li>
+                        <h4 class=""><b>{{ current_year_sales.curr_year_sales|intcomma }}</b></h4>
+                        <p class="text-muted m-b-0">Year</p>
+                    </li> -->
+                </ul>
+
+                <div id="sale-bar" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4">
+        <div class="card m-b-20">
+            <div class="card-block">
+                <h4 class="mt-0 header-title">Milk Distribution in Litres</h4>
+
+                <ul class="list-inline widget-chart m-t-20 text-center">
+                    <li>
+                        <h4 class=""><b>
+                        {% if total_milk_sold.total_sold %}
+                        {{ total_milk_sold.total_sold|intcomma }}
+                        {% else %}
+                        0
+                        {% endif %}
+                        </b></h4>
+                        <p class="text-muted m-b-0">Milk sold</p>
+                    </li>
+                    <li>
+                        <h4 class=""><b>{{ consumed_milk|intcomma |floatformat:2 }}</b></h4>
+                        <p class="text-muted m-b-0">Consumed</p>
+                    </li>
+                </ul>
+
+                <div id="distribution-donut" style="height: 300px"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- end row -->
+
+{% endblock %}

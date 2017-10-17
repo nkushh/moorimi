@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Add Calf{% endblock %}
+
+{% block page_title %}Add Calf Details{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h3>Calf details</h3></div>
+			<div class="panel-body">
+				<form role="form" method="POST" action="{% url 'dairy:new-cattle' %}">{% csrf_token%}
+					<div class="form-group">
+						<label>Tag No.</label>
+						<input type="text" name="tag_no" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>Cattle Name</label>
+						<input type="text" name="name" id="name" class="form-control" required onmouseout="return nameLengthValidation();">
+						<div id="name-error" class="val-error"></div>
+					</div>
+					<div class="form-group">
+						<label>Sex</label><br>
+						<label class="radio-inline"><input type="radio" name="sex" value="Bull" required> Bull</label>
+						<label class="radio-inline"><input type="radio" name="sex" value="Heifer" required> Heifer</label>
+					</div>
+					<div class="form-group">
+						<label>Date of Birth</label>
+	                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker" name="dob" required>
+	                </div>
+					<div class="form-group">
+						<label>Breed</label>
+						<input type="text" name="sire" class="form-control" value="{{ calf.breed}}">
+					</div>
+					<div class="form-group">
+						<label>Dam</label>
+						<input type="text" name="dam" class="form-control" value="{{ calf.cattle}}">
+					</div>
+					<div class="form-group">
+						<label>Sire</label>
+						<input type="text" name="sire" class="form-control" value="{{ calf.sire}}">
+					</div>
+					<div class="form-group">
+						<label>Conception method</label>
+						<input type="text" name="conception_method" class="form-control" value="{{ calf.method}}">
+					</div>
+					<div class="form-group">
+						<label>Stage</label>
+						<input type="text" name="sire" class="form-control" value="Calf">
+					</div>
+	                <div class="form-group">
+						<label>Raised/Purchased</label><br>
+						<label class="radio-inline"><input type="radio" name="gotten_through" value="Raised" required checked> Raised</label>
+						<label class="radio-inline"><input type="radio" name="gotten_through" value="Purchased" required disabled> Purchased</label>
+					</div>
+					<div class="col-md-offset-2">
+						<button type="submit" class="btn btn-primary">Add Calf</button>
+						<button type="reset" class="btn btn-danger">Cancel</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

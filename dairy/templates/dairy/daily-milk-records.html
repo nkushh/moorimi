@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}Daily Milk Records{% endblock %}
+
+{% block page_title %}Milk Sale Records{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-12">
+		<!-- {%  if messages %}
+		{% for message in messages %}
+		<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+		{% endfor %}
+		{% endif %} -->
+		
+		<div class="card m-b-20">
+            <div class="card-block">
+            	<div class="page-header">
+
+					<div class="btn-group pull-right">
+					  <button type="button" class="btn btn-danger">Query By Month</button>
+					  <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    <span class="sr-only">Toggle Dropdown</span>
+					  </button>
+					  <div class="dropdown-menu">
+					  	{% for month in months_choices %}
+					    <a class="dropdown-item" href="{% url 'dairy:daily-production' month.0 %}">{{ month.1 }}</a>
+					    {% endfor %}
+					  </div>
+					</div>
+
+					
+
+					<h2>{% if query_month %} {{ query_month }} {% else %} {% now "F" %} {% endif %} Milk Records</h2>
+				</div>
+				
+				<table class="table table-hover">
+					<thead>
+						<th>Date #</th>
+						<th>Milk produced</th>
+					</thead>
+					<tbody>
+						{% if milk %}
+						{% for record in milk %}
+						<tr>
+							<td>{{ record.milking_date | date:"M d, Y" }}</td>
+							<td style="color: green;">{{ record.total_milk|intcomma|floatformat:2 }} Ltrs</td>
+						</tr>
+						{% endfor %}
+						{% else %}
+						<tr>
+							<td class="text-center"><h3>No milk production recorded yet!</h3></td>
+						</tr>
+						{% endif %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role=dialog>
+	<div class="modal-dialog">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Record milk sale</h4>
+			</div>
+			<div class="modal-body">
+			<form role="form" method="POST" action="{% url 'dairy:record-milk-sale' %}">{% csrf_token %}
+				
+				<div class="form-group">
+					<label>Milk sold</label>
+					<input type="text" name="milk" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Price per Litre</label>
+					<input type="text" name="amount" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Date sold</label>
+                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker" name="date_sold">
+                </div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Record</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

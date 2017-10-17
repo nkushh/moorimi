@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Cattle On-heat{% endblock %}
+
+{% block page_title %}Cattle On-heat{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-12">
+		{% if messages %}
+		{% for message in messages %}
+		<div {% ifequal message.tags "warning" %} class="alert alert-danger" {% else %} class="alert alert-{{ message.tags }}" {% endifequal %}>
+		{{ message }}
+		</div>
+		{% endfor %}
+		{% endif %}
+		
+		<div class="card m-b-20">
+            <div class="card-block">
+            	<div class="page-header">
+					<button class="pull-right btn btn-primary" data-toggle="modal" data-target="#heatRecord"><span class="glyphicon glyphicon-plus"></span> Add Heat Record</button>
+					<h2>All Cattle</h2>
+				</div>
+				
+				<table class="table table-hover">
+					<thead>
+						<th>Record #</th>
+						<th>Cattle</th>
+						<th>Date noted</th>
+						<th class="text-center">Action</th>
+					</thead>
+					<tbody>
+						{% for cow in cattle %}
+						<tr>
+							<td>{{ cow.pk }}</td>
+							<td><a href="#">{{ cow.cattle }}</a></td>
+							<td>{{ cow.date_noted | date:"M d, Y" }}</td>
+							<td><a href="" style="color: green;">Serve</a></td>
+						</tr>
+						{% empty %}
+						<tr>
+							<td class="text-center"><h3>No cattle on-heat currently!</h3></td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+				{% if cattle.has_other_pages %}
+				  <ul class="pagination">
+				    {% if cattle.has_previous %}
+				      <li class="page-item"><a class="page-link" href="?page={{ cattle.previous_page_number }}">Previous</a></li>
+				    {% else %}
+				      <li class="page-item disabled"><span>&laquo;</span></li>
+				    {% endif %}
+				    {% for i in cattle.paginator.page_range %}
+				      {% if cattle.number == i %}
+				        <li class="page-item active">{{ i }} <span class="sr-only">(current)</span></li>
+				      {% else %}
+				        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+				      {% endif %}
+				    {% endfor %}
+				    {% if cattle.has_next %}
+				      <li class="page-item"><a class="page-link" href="?page={{ cattle.next_page_number }}">&raquo;</a></li>
+				    {% else %}
+				      <li class="page-item disabled"><span>&raquo;</span></li>
+				    {% endif %}
+				  </ul>
+				{% endif %}
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="heatRecord" class="modal fade" role=dialog>
+	<div class="modal-dialog">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Record cattle on-heat</h4>
+			</div>
+			<div class="modal-body">
+			<form role="form" method="POST" action="{% url 'breeding:record_heat' %}">{% csrf_token %}
+				<div class="form-group">
+					<label>Cattle</label>
+					<select class="form-control" name="cattle">
+						<option selected disbaled>--Select cow--</option>
+						{% if cows %}
+						{% for cow in cows %}
+						<option value="{{ cow.pk }}">{{ cow.name }}</option>
+						{% endfor %}
+						{% endif %}
+					</select>
+					<div id="cattle_error" class="val-error"></div>
+				</div>
+				<div class="form-group">
+					<label>Date noted</label>
+                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker" name="date_noted" required>
+                </div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Record</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}Milk Records{% endblock %}
+
+{% block page_title %}Milk Records{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col page-header">
+			<a class="pull-right btn btn-warning" href="{% url 'dairy:daily-milk-records' %}"><i class="fa fa-calendar"></i> Daily records</a>
+			<a class="pull-right btn btn-primary" href="{% url 'dairy:add-milk' %}"><i class="fa fa-plus"></i> Add Record</a>
+
+			<div class="btn-group pull-right">
+			  <button type="button" class="btn btn-danger">Query By Month</button>
+			  <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    <span class="sr-only">Toggle Dropdown</span>
+			  </button>
+			  <div class="dropdown-menu">
+			  	{% for month in months_choices %}
+			    <a class="dropdown-item" href="{% url 'dairy:monthly-records' month.0 %}">{{ month.1 }}</a>
+			    {% endfor %}
+			  </div>
+			</div>
+			<h2>{% if query_month %} {{ query_month }} {% else %} {% now "F" %} {% endif %} Milk Records</h2>
+		</div>
+	</div>
+    <div class="row justify-content-start">
+		
+		<div class="col-md-6">
+			{% if messages %}
+			{% for message in messages %}
+			<div {% ifequal message.tags "warning" %} class="alert alert-danger" {% else %} class="alert alert-{{ message.tags }}" {% endifequal %}>
+			{{ message }}
+			</div>
+			{% endfor %}
+			{% endif %}
+
+			<div class="page-header"><h4>Tabular Data</h4></div>
+						
+			<table class="table table-hover">
+				<thead class="thead-default">
+					<th>Cattle name</th>
+					<!-- <th>Session</th> -->
+					<th>Amount</th>
+					<!-- <th>Date added</th> -->
+				</thead>
+				<tbody>
+					{% if milk %}
+					{% for record in milk %}
+					
+					<tr>
+						{% for cow in cattle %}
+						{% ifequal cow.pk record.cattle %}
+						<td><a href="{% url 'dairy:cattle-detail' cow.pk %}">{{ cow.name }}</a></td>
+						{% endifequal %}
+						{% endfor %}
+						<!-- <td>{{ record.session }}</td> -->
+						<td>{{ record.total_milk|intcomma|floatformat:2 }} Ltrs</td>
+						<!-- <td>{{ record.milking_date | date:"M d, Y" }}</td> -->
+					</tr>
+					
+					{% endfor %}
+					{% else %}
+					<tr>
+						<td class="text-center"><h3>No milk records to display yet!</h3></td>
+					</tr>
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+		
+
+		<div class="col-md-6 chart-area">
+			<div class="page-header"><h4>Graphical Data</h4></div>
+			<div id="myfirstchart" style="height: 350px;"></div>
+		</div>
+				
+	</div>
+    
+	{% endblock %}

@@ -1,0 +1,97 @@
+{% load static %}
+<div class="left side-menu">
+    <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
+        <i class="ion-close"></i>
+    </button>
+
+    <!-- LOGO -->
+    <div class="topbar-left">
+        <div class="text-center">
+            <!--<a href="index.html" class="logo">Admiry</a>-->
+            <a href="{% url 'dairy:dashboard' %}" class="logo"><img src="{% static 'assets/images/logo.png' %}" height="42" alt="logo"></a>
+        </div>
+    </div>
+
+    <div class="sidebar-inner slimscrollleft">
+
+        <div class="user-details">
+            <div class="text-center">
+                <img src="{% static 'assets/images/users/avatar-1.jpg' %}" alt="" class="rounded-circle">
+            </div>
+            <div class="user-info">
+                {% if user.is_authenticated %}
+                <h4 class="font-16">{{ user.username }}</h4>
+                <span class="text-muted user-status"><i class="fa fa-dot-circle-o text-success"></i> Online</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div id="sidebar-menu">
+            <ul>
+                {% if user.is_superuser %}
+                <li>
+                    <a href="{% url 'generali:admin-dashboard' %}" class="waves-effect">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span> Dashboard </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'dairy:cattle-list' %}" class="waves-effect"><i class="mdi mdi-cow"></i> <span> Cattle </span> </a>
+                </li>
+                
+
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-gas-cylinder"></i> <span> Milk </span> </a>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'dairy:milk-records' %}">Milk production</a></li>
+                        <li><a href="{% url 'dairy:milk-sale-records' %}">Milk Sale</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="{% url 'breeding:served_cattle' %}" class="waves-effect"><i class="mdi mdi-pulse"></i> <span> Breeding </span> </a>
+                </li>
+
+                <li>
+                    <a href="#" class="waves-effect"><i class="mdi mdi-hospital"></i> <span> Health </span> </a>
+                </li>
+
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account"></i> <span> Accounts </span> </a>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'authentication:accounts' %}">All accounts</a></li>
+                        <li><a href="{% url 'authentication:register_user' %}">Add account</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'dairy:dashboard' %}" class="waves-effect">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span> Dashboard </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'dairy:cattle-list' %}" class="waves-effect"><i class="mdi mdi-cow"></i> <span> Cattle </span> </a>
+                </li>
+
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-gas-cylinder"></i> <span> Milk </span> </a>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'dairy:milk-records' %}">Milk production</a></li>
+                        <li><a href="{% url 'dairy:milk-sale-records' %}">Milk Sale</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="{% url 'breeding:served_cattle' %}" class="waves-effect"><i class="mdi mdi-pulse"></i> <span> Breeding </span> </a>
+                </li>
+
+                <li>
+                    <a href="#" class="waves-effect"><i class="mdi mdi-hospital"></i> <span> Health </span> </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div> <!-- end sidebarinner -->
+</div>
