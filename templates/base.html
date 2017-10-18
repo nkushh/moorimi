@@ -143,7 +143,7 @@
               element: 'milk-produced',
               data: [
               {% for mp_graph in milk_produced_graph %}
-                { date: '{{ mp_graph.milking_date | date:"d" }}', litres: {{ mp_graph.total_graph_milk }} },
+                { date: '{{ mp_graph.milking_date|date:"d" }}', litres: {{ mp_graph.total_graph_milk|intcomma|floatformat:2 }} },
               {% endfor %}
               ],
               xkey: 'date',

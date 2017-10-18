@@ -14,6 +14,7 @@ class Cattle(models.Model):
 	dam = sire = models.CharField(max_length=200, blank=True)
 	sire = models.CharField(max_length=200, blank=True)
 	conception_method = models.CharField(max_length=50)
+	cattle_status = models.IntegerField(default=0)
 	date_added = models.DateField(default = date.today)
 
 	def __str__(self):
@@ -38,3 +39,23 @@ class MilkSale(models.Model):
 
 	def __str__(self):
 		return "{}".format(self.milk)
+
+
+class Cattle_sale(models.Model):
+	account = models.ForeignKey('auth.User', default=1, null=True)
+	cattle = models.ForeignKey(Cattle)
+	amount = models.FloatField()
+	sold_to = models.CharField(max_length=200)
+	date_sold = models.DateField()
+	date_recorded = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return "{}".format(cattle.name)
+
+class Mortality(models.Model):
+	account = models.ForeignKey('auth.User', default=1, null=True)
+	cattle = models.ForeignKey(Cattle)
+	age = models.CharField(max_length=200)
+	postmortem_report = models.TextField()
+	died_on = models.DateField()
+	date_recorded = models.DateTimeField(auto_now_add=True)
