@@ -56,12 +56,8 @@
                     <a href="#" class="waves-effect"><i class="mdi mdi-hospital"></i> <span> Health </span> </a>
                 </li>
 
-                <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account"></i> <span> Accounts </span> </a>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'authentication:accounts' %}">All accounts</a></li>
-                        <li><a href="{% url 'authentication:register_user' %}">Add account</a></li>
-                    </ul>
+                <li>
+                    <a href="{% url 'authentication:accounts' %}" class="waves-effect"><i class="mdi mdi-account"></i> <span> Accounts </span> </a>
                 </li>
                 {% else %}
                 <li>

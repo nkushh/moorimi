@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block page_title %}User Profile{% endblock %}
+
+{% block content %}
+
+<div class=" row justify-content-center">
+	<div class="col-md-6 myprofile">
+		<h2>Account details</h2>
+		<hr>
+		<h4>Fullname: <span>{{ user.first_name }} {{ user.last_name }}</span></h4>
+		<h4>Username: <span>{{ user.username }}</span></h4>
+		<h4>Email: <span>{{ user.email }}</span></h4>
+		<a href="{% url 'authentication:update_account' %}" class="btn btn-primary btn-lg"><i class="fa fa-edit"></i> Edit Account</a>
+	</div>
+</div>
+<div class=" row justify-content-center">
+	<div class="col-md-6 myprofile">
+		<h2>Profile details</h2>
+		<hr>
+		<h4>Farm name: <span>{{ profile.farm_name }}</span></h4>
+		<h4>Address: <span>{{ profile.address }}</span></h4>
+		<h4>Phone No: <span>{{ profile.phone_no }}</span></h4>
+
+		<a href="{% url 'user_profile:update_profile' %}" class="btn btn-primary btn-lg"><i class="fa fa-edit"></i> Edit Profile</a>
+	</div>
+	
+</div>
+{% endblock %}

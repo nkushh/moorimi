@@ -1,10 +1,11 @@
 from django import forms
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import UserRegistrationForm
+from user_profile.models import UserProfile
+from .forms import UserRegistrationForm, UserUpdateForm
 
 # Create your views here.
 @login_required(login_url='login')
@@ -26,7 +27,10 @@ def register_user(request):
 			password = userObj['password']
 
 			if not(User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
-				User.objects.create_user(username, email, password)
+				user = User.objects.create_user(username, email, password)
+
+				# Create a blank profile for the new user
+				UserProfile.objects.create(user=user)
 				messages.success(request, "Success! Account detail successfully recorded.")
 				return redirect('authentication:accounts')
 			else:
@@ -57,6 +61,26 @@ def create_account(request):
 	else:
 		form = UserRegistrationForm()
 	return render(request, 'authentication/create-account.html', {'form' : form})
+
+
+@login_required(login_url='login')
+def update_account(request):
+	account = request.user
+	getAcc = get_object_or_404(User, pk=account.pk)
+	if request.method=='POST':
+		form = UserUpdateForm(request.POST, instance=getAcc)
+		if form.is_valid():
+			acc = form.save()
+			acc.set_password(request.POST['password'])
+			update_session_auth_hash(request, account)
+			acc.save()
+
+			messages.success(request, "Success! Account detail successfully updated.")
+			return redirect('user_profile:profile')
+
+	else:
+		form = UserUpdateForm(instance=getAcc)
+	return render(request, 'authentication/edit-account.html', {'form' : form})
 
 @login_required(login_url='login')
 def deactivate_account(request, account):

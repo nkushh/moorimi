@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'', include('dairy.urls', namespace='dairy')),
     url(r'^admin-dashboard/', include('generali.urls', namespace='generali')),
     url(r'^breeding/', include('breeding.urls', namespace='breeding')),
+    url(r'^profile/', include('user_profile.urls', namespace='user_profile')),
 
 ]
