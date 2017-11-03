@@ -4,11 +4,10 @@ import logging
 import os
 import os.path
 import requests
-import sqlite3
+import psycopg2
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-db_path = os.path.join(BASE_DIR, "db.sqlite3")
 
 def send_sms():
 
@@ -17,7 +16,7 @@ def send_sms():
 
 	# DB Connection
 	try:
-		conn = sqlite3.connect(db_path)
+		conn = psycopg2.connect(dbname='moorimi', user='postgres', host='localhost', password='Skanyiri22')
 		print("Connection to moorimi DB successful")
 	except Error as e:
 		print(e)
@@ -27,7 +26,7 @@ def send_sms():
 	leo = datetime.date.today()
 	leo = leo.strftime('%Y-%m-%d')
 
-	cur.execute("SELECT * FROM dairy_milk WHERE milking_date=?",(leo,))
+	cur.execute("SELECT * FROM dairy_milk WHERE milking_date=%s",(leo,))
 	rows = cur.fetchall()
 
 	if len(rows) < 1:
