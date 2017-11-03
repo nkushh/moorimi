@@ -52,7 +52,7 @@
 						<tr>
 							<td>{{ sale.pk }}</td>
 							<td>{{ sale.milk }} Ltrs</td>
-							<td>Ksh.{{ sale.amount|intcomma|floatformat:2 }}</td>
+							<td>Ksh.{{ sale.amount|intcomma }}</td>
 							<td>{{ sale.date_sold | date:"M d, Y" }}</td>
 						</tr>
 						{% endfor %}
