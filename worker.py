@@ -16,7 +16,7 @@ def send_sms():
 
 	# DB Connection
 	try:
-		conn = psycopg2.connect(dbname='moorimi', user='postgres', host='localhost', password='Skanyiri22')
+		conn = psycopg2.connect(dbname='d22a4oq92fnt5', user='yifgnlfnhrgayq', host='ec2-54-83-48-188.compute-1.amazonaws.com', password='af6e573a50669874029649cf94d55c9829987f56db063f4fc6d22072ab6778c0', port='5432')
 		print("Connection to moorimi DB successful")
 	except Error as e:
 		print(e)

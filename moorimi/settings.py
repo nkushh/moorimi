@@ -86,9 +86,11 @@ WSGI_APPLICATION = 'moorimi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'moorimi',
-        'USER': 'postgres',
-        'PASSWORD': 'Skanyiri22'
+        'NAME': 'd22a4oq92fnt5',
+        'USER': 'yifgnlfnhrgayq',
+        'PASSWORD': 'af6e573a50669874029649cf94d55c9829987f56db063f4fc6d22072ab6778c0',
+        'HOST': 'ec2-54-83-48-188.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
