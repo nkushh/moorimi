@@ -25,7 +25,7 @@ SECRET_KEY = 'z&$b^f0s#s)_@wz1weygby&qukn=cfchv*9qv^b1-fa)@9$a!v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mourimi.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['mourimi.herokuapp.com', 'ndeiya.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
