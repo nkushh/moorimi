@@ -1,0 +1,1 @@
+web: gunicorn moorimi.wsgi --log-file -

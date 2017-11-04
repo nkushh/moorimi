@@ -2,6 +2,7 @@ certifi==2017.7.27.1
 chardet==3.0.4
 Django==1.11.5
 django-crispy-forms==1.7.0
+gunicorn==19.7.1
 idna==2.6
 psycopg2==2.7.3.2
 PyJWT==1.5.3
@@ -11,3 +12,4 @@ requests==2.18.4
 six==1.11.0
 twilio==6.8.0
 urllib3==1.22
+whitenoise==3.3.1

@@ -25,7 +25,7 @@ SECRET_KEY = 'z&$b^f0s#s)_@wz1weygby&qukn=cfchv*9qv^b1-fa)@9$a!v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mourimi.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -128,10 +128,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.django.GripManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+# ]
 
 # Set template pack to be used by crispy forms in renderring your forms.
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
