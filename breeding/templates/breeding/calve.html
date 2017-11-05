@@ -11,7 +11,7 @@
 			<div class="panel-heading"><h3>Calf details</h3></div>
 			<div class="panel-body">
 				<form role="form" method="POST" action="{% url 'dairy:new-cattle' %}">{% csrf_token%}
-					<input type="hidden" name="breeding_id" class="form-control" value="{{ record.pk}}">
+					<input type="hidden" name="breeding_id" value="{{ record.pk }}">
 					<div class="form-group">
 						<label>Tag No.</label>
 						<input type="text" name="tag_no" class="form-control" required>

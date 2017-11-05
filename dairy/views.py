@@ -126,9 +126,12 @@ def new_cattle(request):
 					).save()
 
 			if(request.POST['breeding_id']):
-				record = get_object_or_404(Breeding, pk=request.POST['breeding_id'])
+				pk = request.POST['breeding_id']
+				record = get_object_or_404(Breeding, pk=pk)
 				record.birth_status = 1
 				record.save()
+			else:
+				request.POST['breeding_id'] = ''
 
 			messages.success(request, "Success! Cattle details successfully recorded.")
 			return redirect('dairy:cattle-list')
