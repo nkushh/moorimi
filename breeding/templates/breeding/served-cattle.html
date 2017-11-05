@@ -41,7 +41,7 @@
 							<td>{{ cow.date_served | date:"M d, Y" }}</td>
 							<td>{{ cow.delivery_due | date:"M d, Y" }}</td>
 							<td class="text-center">
-								<a href="" style="color: green;"><i class="mdi mdi-baby"></i> Calve</a> | 
+								<a href="{% url 'breeding:calve' cow.pk %}" style="color: green;"><i class="mdi mdi-baby"></i> Calve</a> | 
 								<a href="" style="color: blue; font-size: 16px;"><i class="mdi mdi-pencil-box-outline"></i> Edit</a> |  
 								<a href="" style="color: red; font-size: 16px;"><i class="mdi mdi-delete-forever"></i> Delete</a>
 							</td>
