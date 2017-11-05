@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from django.db.models import Sum, Count
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Cattle, Milk, MilkSale
-from breeding.models import Breed
+from breeding.models import Breed, Breeding
 import datetime, calendar
 
 # Create your views here.
@@ -129,7 +129,7 @@ def new_cattle(request):
 				record = get_object_or_404(Breeding, pk=request.POST['breeding_id'])
 				record.birth_status = 1
 				record.save()
-				
+
 			messages.success(request, "Success! Cattle details successfully recorded.")
 			return redirect('dairy:cattle-list')
 	else:
