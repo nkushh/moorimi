@@ -117,9 +117,6 @@ def record_heat(request):
 def calve(request, pk):
 	record = get_object_or_404(Breeding, pk=pk)
 
-	record.birth_status = 1
-	record.save()
-
 	context = {
 		'record' : record,
 	}

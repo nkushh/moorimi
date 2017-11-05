@@ -107,6 +107,7 @@ def new_cattle(request):
 		sire = request.POST['sire']
 		conception_method = request.POST['conception_method']
 
+
 		if Cattle.objects.filter(account=account, tag_no=tag_no).exists():
 			messages.warning(request, "Error! That tag number exists. Enter a new one.")
 			return redirect('dairy:cattle-list')
@@ -123,6 +124,12 @@ def new_cattle(request):
 					sire=sire,
 					conception_method=conception_method
 					).save()
+
+			if(request.POST['breeding_id']):
+				record = get_object_or_404(Breeding, pk=request.POST['breeding_id'])
+				record.birth_status = 1
+				record.save()
+				
 			messages.success(request, "Success! Cattle details successfully recorded.")
 			return redirect('dairy:cattle-list')
 	else:
