@@ -14,7 +14,7 @@
 					<div class="form-group">
 						<label>Cattle</label>
 						<input type="text" class="form-control" placeholder="{{ record.cattle.name }}">
-						<input type="hidden" name="cattle" class="form-control" value="record.cattle.pk">
+						<input type="hidden" name="cattle" class="form-control" value="{{ record.cattle.pk }}">
 						<div id="cattle_error" class="val-error"></div>
 					</div>
 					<div class="form-group">
