@@ -52,6 +52,10 @@ def create_account(request):
 
 			if not(User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
 				User.objects.create_user(username, email, password)
+
+				# Create a blank profile for the new user
+				UserProfile.objects.create(user=user)
+
 				messages.success(request, "Success! {} your account was successfully created. Login!".format(username))
 				return redirect('login')
 			else:
