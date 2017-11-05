@@ -8,7 +8,7 @@ from .models import UserProfile
 @login_required(login_url='login')
 def get_profile(request):
 	user = request.user
-	profile = get_object_or_404(UserProfile, pk=user.pk)
+	profile = get_object_or_404(UserProfile, user=user)
 	context = {
 		'user' : user,
 		'profile' : profile,
