@@ -8,6 +8,15 @@
 
 <div class=" row justify-content-center">
 	<div class="col-md-6 myprofile">
+		
+		{% if messages %}
+		{% for message in messages %}
+		<div {% ifequal message.tags "warning" %} class="alert alert-danger" {% else %} class="alert alert-{{ message.tags }}" {% endifequal %}>
+		{{ message }}
+		</div>
+		{% endfor %}
+		{% endif %}
+
 		<h2>Account details</h2>
 		<hr>
 		<h4>Fullname: <span>{{ user.first_name }} {{ user.last_name }}</span></h4>
