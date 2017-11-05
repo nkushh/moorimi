@@ -51,7 +51,7 @@ def create_account(request):
 			password = userObj['password']
 
 			if not(User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
-				User.objects.create_user(username, email, password)
+				user = User.objects.create_user(username, email, password)
 
 				# Create a blank profile for the new user
 				UserProfile.objects.create(user=user)
