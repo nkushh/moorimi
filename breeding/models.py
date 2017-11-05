@@ -21,7 +21,7 @@ class Breeding(models.Model):
 	date_recorded = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return self.cattle
+		return self.cattle.name
 
 class Heat_records(models.Model):
 	account = models.ForeignKey('auth.User', default=1, null=True)
@@ -31,4 +31,4 @@ class Heat_records(models.Model):
 	date_recorded = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return "{}".format(self.cattle.name)
+		return self.cattle.name

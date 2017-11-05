@@ -35,7 +35,7 @@
 							<td>{{ cow.pk }}</td>
 							<td><a href="#">{{ cow.cattle }}</a></td>
 							<td>{{ cow.date_noted | date:"M d, Y" }}</td>
-							<td><a href="" style="color: green;">Serve</a></td>
+							<td><a href="{% url 'breeding:cattle_to_serve' cow.pk %}" style="color: green;">Serve</a></td>
 						</tr>
 						{% empty %}
 						<tr>

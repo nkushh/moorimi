@@ -10,6 +10,19 @@ from dairy.models import Cattle
 import datetime, calendar
 
 # Create your views here.
+def cattle_to_serve(request, pk):
+	record = get_object_or_404(Heat_records, pk=pk)
+	breeds = Breed.objects.all()
+
+	context = {
+		'record' : record,
+		'breeds' : breeds,
+	}
+
+	return render(request, "breeding/serve.html", context)
+
+
+
 def served_cattle(request):
 	account = request.user
 
@@ -99,6 +112,19 @@ def record_heat(request):
 		return redirect('breeding:onheat')
 	else:
 		return redirect('breeding:onheat')
+
+
+def calve(request, pk):
+	record = get_object_or_404(Breeding, pk=pk)
+
+	record.birth_status = 1
+	record.save()
+
+	context = {
+		'record' : record,
+	}
+
+	return render(request, "breeding/calve.html", context)
 
 
 

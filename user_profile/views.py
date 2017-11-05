@@ -13,6 +13,7 @@ def get_profile(request):
 	context = {
 		'user' : user,
 		'profile' : profile,
+		'page-title' : 'User Profile',
 	}
 
 	return render(request, 'user_profile/profile.html', context)
@@ -37,7 +38,7 @@ def update_profile(request):
 			user_profile.phone_no = phone
 			user_profile.last_updated = timezone.now()
 			user_profile.save()
-			
+
 			messages.success(request, "Success! Profile details have been updated.")
 			return redirect('user_profile:profile')
 	else:
