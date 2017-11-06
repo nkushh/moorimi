@@ -26,9 +26,9 @@
 					<thead>
 						<th>Tag No.</th>
 						<th>Cattle name</th>
+						<th>Sex</th>
 						<th>Breed</th>
 						<th>Stage</th>
-						<th>Date added</th>
 						<th class="text-center">Action</th>
 					</thead>
 					<tbody>
@@ -37,9 +37,10 @@
 						<tr>
 							<td>{{ cow.tag_no }}</td>
 							<td><a href="{% url 'dairy:cattle-detail' cow.pk %}">{{ cow.name }}</a></td>
+							<td>{{ cow.sex }}</td>
 							<td>{{ cow.breed }}</td>
 							<td>{{ cow.stage }}</td>
-							<td>{{ cow.date_added | date:"M d, Y" }}</td>
+							
 							<td class="text-center">
 								<div class="dropdown">
 									<button class="btn btn-primary dropdown-toggle" type="button" id="cattleActions" data-toggle="dropdown">
