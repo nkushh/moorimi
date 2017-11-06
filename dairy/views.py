@@ -267,10 +267,10 @@ def record_cattle_death(request):
 		# Calculate age
 		leo = datetime.date.today()
 		dob = cattle.dob
-		if leo.year==dob.year
-			age = leo.month
-		else:
-			age = (leo.year-dob.year)
+		# if leo.year==dob.year
+		# 	age = leo.month
+		# else:
+		age = (leo.year-dob.year)
 
 		record =  Mortality(account=account, cattle=cattle, age=age, postmortem_report=postmortem_report, died_on=date_of_death).save()
 		messages.success(request, "Success! {}'s death recorded successfully.".format(cattle.name))
