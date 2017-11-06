@@ -273,6 +273,8 @@ def record_cattle_death(request):
 		age = (leo.year-dob.year)
 
 		record =  Mortality(account=account, cattle=cattle, age=age, postmortem_report=postmortem_report, died_on=date_of_death).save()
+		cattle.cattle_status = 2
+		cattle.save()
 		messages.success(request, "Success! {}'s death recorded successfully.".format(cattle.name))
 		return redirect('dairy:cattle-list')
 	else:
