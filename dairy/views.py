@@ -444,7 +444,7 @@ def daily_milk_production(request, month):
 @login_required(login_url='login')
 def milk_sale_records(request):
 	account = request.user
-	sales = MilkSale.objects.filter(account=account).order_by('-date_sold')
+	sales = MilkSale.objects.filter(account=account).values('date_sold').annotate(milk_sold=Sum('milk'), amount_made=Sum('amount')).order_by('-date_sold')
 
 	today = datetime.datetime.now()
 	mwaka = today.year

@@ -51,8 +51,8 @@
 						{% for sale in sales %}
 						<tr>
 							<td>{{ sale.pk }}</td>
-							<td>{{ sale.milk }} Ltrs</td>
-							<td>Ksh.{{ sale.amount|intcomma }}</td>
+							<td>{{ sale.milk_sold }} Ltrs</td>
+							<td>Ksh.{{ sale.amount_made|intcomma }}</td>
 							<td>{{ sale.date_sold | date:"M d, Y" }}</td>
 						</tr>
 						{% endfor %}
