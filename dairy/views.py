@@ -125,15 +125,23 @@ def new_cattle(request):
 					conception_method=conception_method
 					).save()
 
+			# Check whether you are recording a calf and the breeding record id is set.
+			# If True, set the birth_status field in breeding table to 1
 			if(request.POST['breeding_id']):
 				pk = request.POST['breeding_id']
 				record = get_object_or_404(Breeding, pk=pk)
 				record.birth_status = 1
 				record.save()
+
+				# Get the calf's mother details and set it's stage to.. 
+				# Lactating now that it has given birth.
+				dam_stage = get_object_or_404(Cattle, pk=record.cattle.pk)
+				dam_stage.stage = 'Lactating'
+				dam_stage.save()
 			else:
 				request.POST['breeding_id'] = ''
 
-			messages.success(request, "Success! Cattle details successfully recorded.")
+			messages.success(request, "Success! {}'s' details successfully recorded.".format(name))
 			return redirect('dairy:cattle-list')
 	else:
 		messages.error(request, "Error! Cattle details were not recorded.")
