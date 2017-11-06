@@ -27,10 +27,10 @@
 			{% endifequal %}</span></h4>
 		
 		{% ifequal cow.stage "Lactating" %}
-		<a class="btn btn-warning" href="{% url 'dairy:dry-off' cow.pk %}"><span class="glyphicon glyphicon-off"></span> Dry-off</a>
+		<a class="btn btn-warning" href="{% url 'dairy:dry-off' cow.pk %}"><i class="fa fa-off"></i> Dry-off</a>
 		{% endifequal %}
-		<a class="btn btn-primary" href="{% url 'dairy:edit-cattle' cow.pk %}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-		<a class="btn btn-danger" href="{% url 'dairy:delete-cattle' cow.pk %}" onclick="return confirm('This action is irreversible. Are you sure?');"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+		<a class="btn btn-primary" href="{% url 'dairy:edit-cattle' cow.pk %}"><i class="fa fa-edit"></i> Edit</a>
+		<a class="btn btn-danger" href="{% url 'dairy:delete-cattle' cow.pk %}" onclick="return confirm('This action is irreversible. Are you sure?');"><i class="fa fa-trash-o"></i> Delete</a>
 	</div>
 	<div class="col-md-8">
 	
