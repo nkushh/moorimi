@@ -141,7 +141,7 @@ def new_cattle(request):
 			except:
 				messages.success(request, "Success! {}'s' details successfully recorded.".format(name))
 
-			
+			messages.success(request, "Success! {}'s' details successfully recorded.".format(name))
 			return redirect('dairy:cattle-list')
 	else:
 		messages.error(request, "Error! Cattle details were not recorded.")
