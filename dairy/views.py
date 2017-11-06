@@ -208,14 +208,15 @@ def record_cattle_sale(request):
 		sold_to = request.POST['sold_to']
 		date_sold = request.POST['date_sold']
 
-		sale = Cattle_sale(account=account, cattle=cattle, amount=amount, sold_to=sold_to, date_sold=date_sold).save()
-		if sale:
+		
+		if not(Cattle_sale.objects.filter(account=account, cattle=cattle).exists()):
+			sale = Cattle_sale(account=account, cattle=cattle, amount=amount, sold_to=sold_to, date_sold=date_sold).save()
 			cattle.cattle_status = 1
 			cattle.save()
 			messages.success(request, "Success! Sale of {} has been recorded successfully".format(cattle.name))
 			return redirect('dairy:cattle-list')
 		else:
-			messages.error(request, "Error! Sale of {} hasn't been recorded".format(cattle.name))
+			messages.error(request, "Error! Sale record of {} already exists".format(cattle.name))
 			return redirect('dairy:cattle-list')
 	else:
 		messages.warning(request, "Warning! No data was posted")
