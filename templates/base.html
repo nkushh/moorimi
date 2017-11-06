@@ -159,7 +159,7 @@
             new Morris.Bar({
               element: 'sale-bar',
               data: [
-                { mwezi: 'Current', sales: {{ current_month_sales.curr_month_sales }} },
+                { mwezi: 'Current', sales: {% if not current_month_sales.curr_month_sales %} 0 {% else %} {{ current_month_sales.curr_month_sales }}{% endif %} },
                 { mwezi: 'Previous', sales: {% if not previous_month_sales.prev_month_sales %} 0 {% else %}{{ previous_month_sales.prev_month_sales }}{% endif %} },
               ],
               xkey: 'mwezi',
@@ -175,8 +175,8 @@
             new Morris.Donut({
               element: 'distribution-donut',
               data: [
-                {label: "Milk Sold", value: {{ total_milk_sold.total_sold|intcomma }}},
-                {label: "Consumed", value: {{ consumed_milk|intcomma |floatformat:2 }}}
+                {label: "Milk Sold", value: {% if not total_milk_sold.total_sold %}0{% else %} {{ total_milk_sold.total_sold|intcomma }} {% endif %} },
+                {label: "Consumed", value: {% if not consumed_milk %}0 {{ consumed_milk|intcomma |floatformat:2 }} {% endif %} }
               ],
               colors: ['#4ac18e', '#eca14f']
             });
