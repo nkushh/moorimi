@@ -238,10 +238,10 @@ def record_cattle_sale(request):
 			cattle.cattle_status = 1
 			cattle.save()
 			messages.success(request, "Success! Sale of {} has been recorded successfully".format(cattle.name))
-			return redirect('dairy:cattle-list')
+			return redirect('dairy:sold-cattle')
 		else:
 			messages.error(request, "Error! Sale record of {} already exists".format(cattle.name))
-			return redirect('dairy:cattle-list')
+			return redirect('dairy:sold-cattle')
 	else:
 		messages.warning(request, "Warning! No data was posted")
 		return redirect('dairy:cattle-list')
