@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Sum, Count
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Cattle, Milk, MilkSale
+from .models import Cattle, Milk, MilkSale, Cattle_sale
 from breeding.models import Breed, Breeding
 import datetime, calendar
 
@@ -197,6 +197,29 @@ def sell_cattle(request, cattle_id):
 	}
 
 	return render(request, "dairy/cattle-sale.html", context)
+
+@login_required(login_url='login')
+def record_cattle_sale(request):
+	account = request.user
+	if request.method == 'POST':
+		account = account
+		cattle = get_object_or_404(Cattle, request.POST['cattle'])
+		amount = request.POST['amount']
+		sold_to = request.POST['sold_to']
+		date_sold = request.POST['date_sold']
+
+		sale = Cattle_sale(account=account, cattle=cattle, amount=amount, sold_to=sold_to, date_sold=date_sold).save()
+		if sale:
+			messages.success(request, "Success! Sale of {} has been recorded successfully".format(cattle.name))
+			return redirect('dairy:cattle-list')
+		else:
+			messages.error(request, "Error! Sale of {} hasn't been recorded".format(cattle.name))
+			return redirect('dairy:cattle-list')
+	else:
+		messages.warning(request, "Warning! No data was posted")
+		return redirect('dairy:cattle-list')
+
+
 
 
 @login_required(login_url='login')
