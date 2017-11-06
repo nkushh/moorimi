@@ -18,7 +18,7 @@
 		<h4><strong>Status: </strong> <span>
 			{% ifequal cow.cattle_status 1 %}
 			<span class="label label-warning">Sold</span>
-			{% endif %}
+			{% endifequal %}
 			{% ifequal cow.cattle_status 2 %}
 			<span class="label label-danger">Deceased</span>
 			{% endifequal %}
