@@ -17,13 +17,13 @@
 		<h4><strong>D.o.B: </strong> <span>{{ cow.dob|date:"M d, Y" }}</span></h4>
 		<h4><strong>Status: </strong> <span>
 			{% ifequal cow.cattle_status 1 %}
-			<span class="label label-warning">Sold</span>
+			<span class="badge badge-warning">Sold</span>
 			{% endifequal %}
 			{% ifequal cow.cattle_status 2 %}
-			<span class="label label-danger">Deceased</span>
+			<span class="badge badge-danger">Deceased</span>
 			{% endifequal %}
 			{% ifequal cow.cattle_status 0 %}
-			<span class="label label-success">Active</span>
+			<span class="badge badge-success">Active</span>
 			{% endifequal %}</span></h4>
 		
 		<a class="btn btn-primary" href="{% url 'dairy:edit-cattle' cow.pk %}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
