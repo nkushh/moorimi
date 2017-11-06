@@ -18,7 +18,7 @@
 		<div class="card m-b-20">
             <div class="card-block">
             	<div class="page-header">
-            		<a class="pull-right btn btn-danger" href="{% url 'breeding:onheat' %}"><i class="mdi mdi-oil-temperature"></i> Cattle On-heat</a>
+            		<a class="pull-right btn btn-danger" href="{% url 'breeding:onheat' %}"><span class="badge badge-light">{% if on_heat %}{{ on_heat }}{% else %}0{% endif %}</span> <i class="mdi mdi-oil-temperature"></i> Cattle On-heat</a>
 					<button class="pull-right btn btn-primary" data-toggle="modal" data-target="#breedingRecord"><i class="mdi mdi-plus"></i> Add Breeding Record</button>
 					<h2>Served Cattle</h2>
 				</div>

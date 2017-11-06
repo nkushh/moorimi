@@ -12,6 +12,7 @@ import datetime, calendar
 # Create your views here.
 def cattle_to_serve(request, pk):
 	record = get_object_or_404(Heat_records, pk=pk)
+	on_heat = Heat_records.objects.filter(account=account, heat_status=0).count()
 	breeds = Breed.objects.all()
 
 	context = {
