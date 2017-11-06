@@ -16,9 +16,9 @@
 		<h4><strong>Sex: </strong> <span>{{ cow.sex }}</span></h4>
 		<h4><strong>D.o.B: </strong> <span>{{ cow.dob|date:"M d, Y" }}</span></h4>
 		<h4><strong>Status: </strong> <span>
-			{% if cow.cattle_status==1 %}
+			{% if cow.cattle_status=='1' %}
 			<span class="label label-warning">Sold</span>
-			{% elif cow.cattle_status==2 %}
+			{% elif cow.cattle_status=='2' %}
 			<span class="label label-danger">Deceased</span>
 			{% else %}
 			<span class="label label-success">Active</span>
