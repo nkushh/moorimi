@@ -9,7 +9,7 @@
 	<div class="col-md-12">
 		{% if messages %}
 		{% for message in messages %}
-		<div {% ifequal message.tags "warning" %} class="alert alert-danger" {% else %} class="alert alert-{{ message.tags }}" {% endifequal %}>
+		<div {% ifequal message.tags "error" %} class="alert alert-danger" {% else %} class="alert alert-{{ message.tags }}" {% endifequal %}>
 		{{ message }}
 		</div>
 		{% endfor %}
