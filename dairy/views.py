@@ -273,7 +273,7 @@ def record_cattle_death(request):
 		if age==0:
 			age = leo.month - dob.month
 			age = str(age)+' months'
-		age = str(age)+' years'
+		age = str(age)
 
 		record =  Mortality(account=account, cattle=cattle, age=age, postmortem_report=postmortem_report, died_on=date_of_death).save()
 		cattle.cattle_status = 2
