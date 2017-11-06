@@ -271,7 +271,7 @@ def record_cattle_death(request):
 		# 	age = leo.month
 		# else:
 		age = (leo.year-dob.year)
-		age = str(age)+' years'
+		age = str(age)
 		if str(age)=="0":
 			age = str(leo.month)+' months'
 
