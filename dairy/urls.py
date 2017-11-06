@@ -28,4 +28,5 @@ urlpatterns = [
 	url(r'^monthly-milk-sales/(\w+)/$', views.monthly_milk_sales, name='monthly-sales'),
 	# Cattle sale records
 	url(r'sell-cattle/(?P<cattle_id>\d+)/$', views.sell_cattle, name='sell-cattle'),
+	url(r'record-cattle-sale/$', views.record_cattle_sale, name='record-cattle-sale'),
 ]
