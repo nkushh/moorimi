@@ -203,7 +203,7 @@ def record_cattle_sale(request):
 	account = request.user
 	if request.method == 'POST':
 		account = account
-		cattle = get_object_or_404(Cattle, request.POST['cattle'])
+		cattle = get_object_or_404(Cattle, pk=request.POST['cattle'])
 		amount = request.POST['amount']
 		sold_to = request.POST['sold_to']
 		date_sold = request.POST['date_sold']
