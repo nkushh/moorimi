@@ -66,7 +66,7 @@ def dashboard(request):
 @login_required(login_url='login')
 def fetch_cattle(request):
 	account=request.user
-	cattle = Cattle.objects.filter(account=account)
+	cattle = Cattle.objects.filter(account=account, cattle_status=0)
 	page = request.GET.get('page', 1)
 
 	paginator = Paginator(cattle, 10)
