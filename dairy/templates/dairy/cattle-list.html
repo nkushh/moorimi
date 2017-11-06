@@ -46,8 +46,10 @@
 										<i class="fa fa-cog"></i>
 									</button>
 									<div class="dropdown-menu">
+										<a class="dropdown-item" href="{% url 'dairy:edit-cattle' cow.pk %}">Edit</a>
 										<a class="dropdown-item" href="#">Sell</a>
 									    <a class="dropdown-item" href="#">Record death</a>
+									    <a class="dropdown-item" href="{% url 'dairy:delete-cattle' cow.pk %}">Delete</a>
 									</div>
 								</div>
 							</td>
