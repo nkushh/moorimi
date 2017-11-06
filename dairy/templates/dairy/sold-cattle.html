@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 {% block title %}Sold Cattle{% endblock %}
 
@@ -36,7 +37,7 @@
 							<td>{{ cow.cattle.tag_no }}</td>
 							<td><a href="{% url 'dairy:cattle-detail' cow.cattle.pk %}">{{ cow.cattle.name }}</a></td>
 							<td>{{ cow.cattle.sex }}</td>
-							<td>{{ cow.amount }}</td>
+							<td>ksh.{{ cow.amount|intcomma }}</td>
 							<td>{{ cow.date_sold | date:"M d, Y" }}</td>
 						</tr>
 						{% endfor %}
