@@ -267,12 +267,10 @@ def record_cattle_death(request):
 		# Calculate age
 		leo = datetime.date.today()
 		dob = cattle.dob
-		# if leo.year==dob.year
-		# 	age = leo.month
-		# else:
+		
 		age = (leo.year-dob.year)
 
-		if str(age)=="0":
+		if age==0:
 			age = leo.month - dob.month
 			age = str(age)+' months'
 		age = str(age)+' years'
