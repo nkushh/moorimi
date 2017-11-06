@@ -189,6 +189,17 @@ def update_cattle(request, cattle_id):
 
 
 @login_required(login_url='login')
+def sell_cattle(request, cattle_id):
+	cattle = get_object_or_404(Cattle, pk=cattle_id)
+
+	context = {
+		'cattle' : cattle,
+	}
+
+	return render(request, "dairy/cattle-sale.html", context)
+
+
+@login_required(login_url='login')
 def delete_cattle(request, cattle_id):
 	cattle = get_object_or_404(Cattle, pk=cattle_id)
 	cattle.delete()
