@@ -11,7 +11,7 @@
 			<div class="panel-heading"><h3>Record Death</h3></div>
 			<div class="panel-body">
 				
-				<form role="form" method="POST" action="{% url 'dairy:record-cattle-sale' %}">{% csrf_token%}
+				<form role="form" method="POST" action="{% url 'dairy:record-death' %}">{% csrf_token%}
 					<div class="form-group">
 						<label>Cattle</label>
 						<input type="text" class="form-control" placeholder="{{ cattle.name }}">

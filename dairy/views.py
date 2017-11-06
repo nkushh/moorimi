@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Sum, Count
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Cattle, Milk, MilkSale, Cattle_sale
+from .models import Cattle, Milk, MilkSale, Cattle_sale, Mortality
 from breeding.models import Breed, Breeding
 import datetime, calendar
 
@@ -256,6 +256,30 @@ def cattle_death(request, cattle_id):
 	}
 
 	return render(request, "dairy/record-death.html", context)
+
+@login_required(login_url='login')
+def record_cattle_death(request):
+	account = request.user
+	if request.method == "POST":
+		cattle = get_object_or_404(Cattle, pk=request.POST['cattle'])
+		date_of_death = request.POST['died_on']
+		postmortem_report = request.POST['postmortem_report']
+		# Calculate age
+		today = datetime.date.today()
+		dob = cattle.dob
+		if today.year==dob.year
+			age = today.month
+		else:
+			age = (today.year-dob.year)
+
+		record =  Mortality(account=account, cattle=cattle, age=age, postmortem_report=postmortem_report, died_on=date_of_death).save()
+		messages.success(request, "Success! {}'s death recorded successfully.".format(cattle.name))
+		return redirect('dairy:cattle-list')
+	else:
+		messages.warning(request, "Warning! No data was posted.")
+		return redirect('dairy:cattle-list')
+
+
 
 
 @login_required(login_url='login')
