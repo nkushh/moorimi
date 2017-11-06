@@ -28,7 +28,7 @@
 		
 		{% ifequal cow.stage "Lactating" %}
 		<a class="btn btn-warning" href="{% url 'dairy:dry-off' cow.pk %}"><span class="glyphicon glyphicon-off"></span> Dry-off</a>
-		{% endif %}
+		{% endifequal %}
 		<a class="btn btn-primary" href="{% url 'dairy:edit-cattle' cow.pk %}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
 		<a class="btn btn-danger" href="{% url 'dairy:delete-cattle' cow.pk %}" onclick="return confirm('This action is irreversible. Are you sure?');"><span class="glyphicon glyphicon-trash"></span> Delete</a>
 	</div>
