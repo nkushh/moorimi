@@ -188,6 +188,30 @@ def update_cattle(request, cattle_id):
 		return redirect('dairy:cattle-detail', cattle_id=cattle.pk)
 
 
+
+#Fetch records of cattle sold
+@login_required(login_url='login')
+def sold_cattle(request):
+	account = request.user
+	records = Cattle_sale.objects.filter(account=account)
+	page = request.GET.get('page', 1)
+
+	paginator = Paginator(records, 10)
+
+	try:
+		records = paginator.page(page)
+	except PageNotAnInteger:
+		records = paginator.page(1)
+	except EmptyPage:
+		records = paginator.page(paginator.num_pages)
+
+	context = {
+		'records' : records,
+	}
+
+	return render(request, "dairy/sold-cattle.html", context)
+
+
 @login_required(login_url='login')
 def sell_cattle(request, cattle_id):
 	cattle = get_object_or_404(Cattle, pk=cattle_id)
