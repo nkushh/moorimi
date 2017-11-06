@@ -2,7 +2,7 @@
 <div class="topbar">
 
     <nav class="navbar-custom">
-
+        <h3 class="page-title float-left">{% block page_title %}{% endblock %}</h3>
         <ul class="list-inline float-right mb-0">
             <li class="list-inline-item dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
@@ -51,7 +51,7 @@
                     <i class="ion-navicon"></i>
                 </button>
             </li>
-            <li class="list-inline-item">
+            <li class="hide-phone list-inline-item app-search">
                 <h3 class="page-title">{% block page_title %}{% endblock %}</h3>
             </li>
         </ul>
