@@ -15,6 +15,14 @@
 		<h4><strong>Breed: </strong> <span>{{ cow.breed }}</span></h4>
 		<h4><strong>Sex: </strong> <span>{{ cow.sex }}</span></h4>
 		<h4><strong>D.o.B: </strong> <span>{{ cow.dob|date:"M d, Y" }}</span></h4>
+		<h4><strong>Status: </strong> <span>
+			{% ifequal cow.cattle_status 1 %}
+			<span class="label label-warning">Sold</span>
+			{% elifequal cow.cattle_status 2 %}
+			<span class="label label-danger">Deceased</span>
+			{% else %}
+			<span class="label label-success">Active</span>
+			{% endifequal %}</span></h4>
 		
 		<a class="btn btn-primary" href="{% url 'dairy:edit-cattle' cow.pk %}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
 		<a class="btn btn-danger" href="{% url 'dairy:delete-cattle' cow.pk %}" onclick="return confirm('This action is irreversible. Are you sure?');"><span class="glyphicon glyphicon-trash"></span> Delete</a>
