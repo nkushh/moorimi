@@ -30,4 +30,6 @@ urlpatterns = [
 	url(r'^sold-cattle/$', views.sold_cattle, name='sold-cattle'),
 	url(r'sell-cattle/(?P<cattle_id>\d+)/$', views.sell_cattle, name='sell-cattle'),
 	url(r'record-cattle-sale/$', views.record_cattle_sale, name='record-cattle-sale'),
+	# Cattle mortality records
+	url(r'^add-mortality/(?P<cattle_id>\d+)/$', views.cattle_death, name='cattle-death')
 ]

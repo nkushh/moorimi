@@ -49,7 +49,7 @@
 									<div class="dropdown-menu">
 										<a class="dropdown-item" href="{% url 'dairy:edit-cattle' cow.pk %}">Edit</a>
 										<a class="dropdown-item" href="{% url 'dairy:sell-cattle' cow.pk %}">Sell</a>
-									    <a class="dropdown-item" href="#">Record death</a>
+									    <a class="dropdown-item" href="{% url 'dairy:cattle-death' cow.pk %}">Record death</a>
 									    <a class="dropdown-item" href="{% url 'dairy:delete-cattle' cow.pk %}">Delete</a>
 									</div>
 								</div>

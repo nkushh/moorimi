@@ -247,6 +247,15 @@ def record_cattle_sale(request):
 		return redirect('dairy:cattle-list')
 
 
+@login_required(login_url='login')
+def cattle_death(request, cattle_id):
+	cattle = get_object_or_404(Cattle, pk=cattle_id)
+
+	context = {
+		'cattle' : cattle,
+	}
+
+	return render(request, "dairy/record-death.html", context)
 
 
 @login_required(login_url='login')

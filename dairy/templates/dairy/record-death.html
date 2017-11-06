@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Record Death{% endblock %}
+
+{% block page_title %}Add Cattle Death Record{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h3>Record Death</h3></div>
+			<div class="panel-body">
+				
+				<form role="form" method="POST" action="{% url 'dairy:record-cattle-sale' %}">{% csrf_token%}
+					<div class="form-group">
+						<label>Cattle</label>
+						<input type="text" class="form-control" placeholder="{{ cattle.name }}">
+						<input type="hidden" name="cattle" class="form-control" value="{{ cattle.pk }}">
+					</div>
+					<div class="form-group">
+						<label>Postmortem Report</label>
+						<textarea class="form-control" name="postmortem_report"></textarea>
+					</div>
+					<div class="form-group">
+						<label>Died on</label>
+	                    <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker" name="died_on" required>
+	                </div>
+					<div class="col-md-offset-2">
+						<button type="submit" class="btn btn-primary">Record sale</button>
+						<button type="reset" class="btn btn-danger">Cancel</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
