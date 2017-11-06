@@ -119,7 +119,7 @@
                 {% for record in milk %}
                 {% for cow in cattle %}
                 {% ifequal cow.pk record.cattle %}
-              { cow: '{{ cow.name }}', value: {{ record.total_milk|floatformat:2 }} },
+              { cow: '{{ cow.name }}', value: {% if not record.total_milk %}0{% else %} {{ record.total_milk|floatformat:2 }} {% endif %} },
               {% endifequal %}
               {% endfor %}
               {% endfor %}
