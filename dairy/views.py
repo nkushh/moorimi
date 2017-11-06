@@ -127,7 +127,7 @@ def new_cattle(request):
 
 			# Check whether you are recording a calf and the breeding record id is set.
 			# If True, set the birth_status field in breeding table to 1
-			if(request.POST['breeding_id']):
+			try:
 				pk = request.POST['breeding_id']
 				record = get_object_or_404(Breeding, pk=pk)
 				record.birth_status = 1
@@ -138,10 +138,10 @@ def new_cattle(request):
 				dam_stage = get_object_or_404(Cattle, pk=record.cattle.pk)
 				dam_stage.stage = 'Lactating'
 				dam_stage.save()
-			else:
-				request.POST['breeding_id'] = ''
+			except:
+				messages.success(request, "Success! {}'s' details successfully recorded.".format(name))
 
-			messages.success(request, "Success! {}'s' details successfully recorded.".format(name))
+			
 			return redirect('dairy:cattle-list')
 	else:
 		messages.error(request, "Error! Cattle details were not recorded.")
