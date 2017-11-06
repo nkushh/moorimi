@@ -175,8 +175,8 @@
             new Morris.Donut({
               element: 'distribution-donut',
               data: [
-                {label: "Milk Sold", value: {% if not total_milk_sold.total_sold %}0{% else %} {{ total_milk_sold.total_sold|intcomma }} {% endif %} },
-                {label: "Consumed", value: {% if not consumed_milk %}0{% else %} {{ consumed_milk|intcomma |floatformat:2 }} {% endif %} }
+                {label: "Milk Sold", value: {% if not total_milk_sold.total_sold %} 0 {% else %} {{ total_milk_sold.total_sold|intcomma }} {% endif %} },
+                {label: "Consumed", value: {% if not consumed_milk %} 0 {% else %} {{ consumed_milk|intcomma |floatformat:2 }} {% endif %} }
               ],
               colors: ['#4ac18e', '#eca14f']
             });

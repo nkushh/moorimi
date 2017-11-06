@@ -501,5 +501,14 @@ def annual_milk_sales(request):
 	}
 	return render(request, 'dairy/milk-sale.html', context)
 
+# Set cow to dry-off to allow for mammary gland recovery
+@login_required(login_url='login')
+def set_dry_off(request, cattle_id):
+	cattle = get_object_or_404(Cattle, pk=cattle_id)
+	cattle.stage = 'Dry-off'
+	cattle.save()
+	messages.success(request, "Success! {} set to Dry-off.".format(cattle.name))
+	return redirect('dairy:cattle-list')
+
 
 

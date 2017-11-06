@@ -22,6 +22,7 @@ urlpatterns = [
 	url(r'^daily-milk-records/$', views.daily_milk_records, name='daily-milk-records'),
 	url(r'^daily-milk-production/(\w+)/$', views.daily_milk_production, name='daily-production'),
 	url(r'^monthly-milk-records/(\w+)/$', views.monthly_milk_records, name='monthly-records'),
+	url(r'^set-dry-off/(?P<cattle_id>\d+)/$', views.set_dry_off, name='dry-off'),
 	# Milk sale records
 	url(r'^milk-sale-records/$', views.milk_sale_records, name='milk-sale-records'),
 	url(r'^record-milk-sale/$', views.record_milk_sale, name='record-milk-sale'),
