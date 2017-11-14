@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'authentication',
     'breeding',
     'dairy',
+    'feeds',
     'generali',
+    'health',
     'user_profile',
 ]
 
