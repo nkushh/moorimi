@@ -88,13 +88,20 @@ WSGI_APPLICATION = 'moorimi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd22a4oq92fnt5',
-        'USER': 'yifgnlfnhrgayq',
-        'PASSWORD': 'af6e573a50669874029649cf94d55c9829987f56db063f4fc6d22072ab6778c0',
-        'HOST': 'ec2-54-83-48-188.compute-1.amazonaws.com',
+        'NAME': 'moorimi',
+        'USER': 'postgres',
+        'PASSWORD': 'Skanyiri22',
+        'HOST': 'localhost',
         'PORT': '5432'
     }
 }
+
+# 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd22a4oq92fnt5',
+#         'USER': 'yifgnlfnhrgayq',
+#         'PASSWORD': 'af6e573a50669874029649cf94d55c9829987f56db063f4fc6d22072ab6778c0',
+#         'HOST': 'ec2-54-83-48-188.compute-1.amazonaws.com',
+#         'PORT': '5432'
 
 
 # Password validation
@@ -133,14 +140,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
-
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-# ]
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Set template pack to be used by crispy forms in renderring your forms.
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
