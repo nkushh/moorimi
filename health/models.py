@@ -2,11 +2,19 @@ from django.db import models
 from dairy.models import Cattle
 
 # Create your models here.
-class Health_record(models.Model):
+class Vaccines(models.Model):
+	account = account = models.ForeignKey('auth.User', default=1, null=True)
+	vaccine_name = models.CharField(max_length=200)
+	administered_to = models.CharField(max_length=250)
+	date_added = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return self.vaccine_name
+
+class Health_case(models.Model):
 	account = account = models.ForeignKey('auth.User', default=1, null=True)
 	animal = models.ForeignKey(Cattle)
 	symptoms = models.TextField()
-	diagnosis = models.CharField(max_length=200)
 	treatment_date = models.DateField()
 
 	def __str__(self):
@@ -14,7 +22,8 @@ class Health_record(models.Model):
 
 class Treatment(models.Model):
 	account = models.ForeignKey('auth.User', default=1, null=True)
-	record = models.ForeignKey(Health_record)
+	record = models.ForeignKey(Health_case)
+	diagnosis = models.CharField(max_length=200)
 	treatment = models.TextField()
 	result = models.CharField(max_length=200, blank=True)
 	vet = models.CharField(max_length=200, blank=True)
@@ -27,7 +36,7 @@ class Treatment(models.Model):
 	def __str__(self):
 		return self.record.animal.name
 
-class Vaccinate_schedule(models.Model):
+class Vaccination_schedule(models.Model):
 	account = account = models.ForeignKey('auth.User', default=1, null=True)
 	vaccine = models.CharField(max_length=200)
 	scheduled_date = models.DateField()
@@ -39,7 +48,7 @@ class Vaccinate_schedule(models.Model):
 
 class Vaccinated_animals(models.Model):
 	account = account = models.ForeignKey('auth.User', default=1, null=True)
-	vaccine = models.ForeignKey(Vaccinate_schedule)
+	vaccine = models.ForeignKey(Vaccination_schedule)
 	cattle = models.ForeignKey(Cattle)
 
 	def __str__(self):
@@ -62,7 +71,7 @@ class Dewormed_animals(models.Model):
 	cattle = models.ForeignKey(Cattle)
 
 	def __str__(self):
-		return self.deworming_event.scheduled_date
+		return self.cattle.name
 
 
 
